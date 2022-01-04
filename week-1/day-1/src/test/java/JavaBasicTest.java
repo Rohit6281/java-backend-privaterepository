@@ -1,5 +1,5 @@
 public class JavaBasicTest {
-    public void testVariables (int num1 , int num2)
+    public void testVariables ()
     {
         int age=10;
         double sal=20.3;
