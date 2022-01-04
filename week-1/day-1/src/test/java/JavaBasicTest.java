@@ -1,5 +1,5 @@
-public class AdditionTest {
-    public void testAdditionCase (int num1 , int num2)
+public class JavaBasicTest {
+    public void testVariables (int num1 , int num2)
     {
         int age=10;
         double sal=20.3;
@@ -9,6 +9,7 @@ public class AdditionTest {
         String str="new java";
         boolean mgr= false;
         float  g = 20.4f;
+        byte byt=10;
     }
     public void methods()
     {
