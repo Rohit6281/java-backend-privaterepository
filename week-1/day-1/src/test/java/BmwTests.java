@@ -1,4 +1,5 @@
 import clsobj.Bmw;
+import clsobj.Car;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,5 +20,25 @@ public class BmwTests {
         int actualSpeed=bmw.speed;
         Assertions.assertEquals(expectedSpeed,actualSpeed);
     }
+    @DisplayName("test is bmw car")
+    @Test
+    void testBmwObjectCar()
+    {
+        Bmw bmw = new Bmw ();
+        boolean expected = true;
+        boolean actual =bmw instanceof Car;
+        Assertions.assertEquals(expected,actual);
+    }
+    @DisplayName(" test car is not a Bmw")
+    @Test
+    void testCarObjectNotBmw()
+    {
+       Car car = new Car();
+       boolean expected = true;
+       boolean actual =car instanceof Bmw;
+       Assertions.assertEquals(expected,actual);
+    }
+
+
 
 }
