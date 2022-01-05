@@ -5,13 +5,13 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class BmwTests {
-    @DisplayName("")
+    @DisplayName(" invalid object")
     @Test
     void testInValidObject(){
         Bmw bmw =null;
         Assertions.assertNull(bmw);
     }
-    @DisplayName("")
+    @DisplayName("valid object")
     @Test
     void testValidObject(){
         Bmw bmw =new Bmw();
@@ -20,7 +20,7 @@ public class BmwTests {
         int actualSpeed=bmw.speed;
         Assertions.assertEquals(expectedSpeed,actualSpeed);
     }
-    @DisplayName("test is bmw car")
+    @DisplayName("test is bmw obj of  car")
     @Test
     void testBmwObjectCar()
     {

@@ -38,6 +38,28 @@ public class CarTests
            int actualSpeed= car.speed;
            Assertions.assertEquals(exceptedSpeed, actualSpeed);
        }
+    @DisplayName("Check Car Speed ")
+    @Test
+    void testSpeedUp() {
+        Car car = new Car(); // here speed is 10
+        car.speedUp(); // speed = speed + 10 = 10 + 10 = 20
+
+        int expectedSpeed = 20;
+        int actualSpeed = car.speed;
+
+        Assertions.assertEquals(expectedSpeed, actualSpeed);
+    }
+
+    @DisplayName("Check Speed if it negative")
+    @Test
+    void testSpeedUpNegative() {
+        Car car = new Car(-100);
+        car.speedUp();
+
+        int expectedSpeed = -90;
+        int actualSpeed = car.speed;
+        Assertions.assertEquals(expectedSpeed, actualSpeed);
+    }
 
 
 
