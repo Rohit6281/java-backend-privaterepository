@@ -47,10 +47,28 @@ public class CollectionDemo {
         queue.forEach(System.out::println);
         return queue;
     }
+    public void mapDemo(){
+        Map<Integer,String> map = new HashMap<Integer,String>();
+        map.put(1, "abc");
+        map.put(2, "pqr");
+        map.put(3, "lmn");
+        map.put(4, "xyz");
+        Set<Integer> Keys=map.keySet();
+        Keys.forEach(Key-> System.out.println("Key- "+Key));
+        Collection<String> values=map.values();
+        values.forEach(val-> System.out.println("value-"+val));
+
+        map.remove(1,"abc");
+        System.out.println("2 available -> "+map.containsKey(2));
+        System.out.println("lmn available ->"+map.containsValue("lmn"));
+        System.out.println("element at 3"+map.getOrDefault(3,"none"));
+        map.forEach((k,v)->System.out.println("key-"+k+"value-"+v));
+    }
     public static void main(String[] args)
     {
         CollectionDemo cdm=new CollectionDemo();
         cdm.queueDemo();
+        cdm.mapDemo();
     }
 
 
