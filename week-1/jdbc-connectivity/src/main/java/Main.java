@@ -18,7 +18,8 @@ public class Main {
           //  System.out.println("employee created sucessfully");
             //service.find();
             //service.findEmployeeByName("pqr");
-            service.txnDemo(60, "kol", Date.valueOf(LocalDate.now()), true, 100);
+           // service.txnDemo(60, "kol", Date.valueOf(LocalDate.now()), true, 100);
+        service.update();
         }
     }
 
