@@ -53,10 +53,7 @@ public class DbService {
        PreparedStatement ps= connection.prepareStatement(sql);
        ps.setString(1,name);
        ResultSet rs= ps.executeQuery();
-       if(!rs.next()){
-           System.out.println("no record found"+name);
-           return;
-       }
+
        while ((rs.next())){
            int id = rs.getInt("emp_id");
            String nm = rs.getString("emp_name");
