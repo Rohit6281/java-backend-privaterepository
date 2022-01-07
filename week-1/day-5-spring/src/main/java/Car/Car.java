@@ -1,13 +1,15 @@
 package Car;
 
 public class Car {
-    private  String model;
+    private  int Speed;
 
-    public String getModel() {
-        return model;
+    public int getSpeed() {
+        return Speed;
     }
 
-    public void setModel(String model) {
-        this.model = model;
+    public void setSpeed(int speed) {
+        this.Speed = Speed;
     }
+
+
 }
