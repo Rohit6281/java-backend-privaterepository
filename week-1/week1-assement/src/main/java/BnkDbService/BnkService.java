@@ -1,7 +1,5 @@
 package BnkDbService;
 
-import com.mysql.cj.jdbc.result.ResultSetImpl;
-
 import java.sql.*;
 
 public class BnkService {
@@ -26,7 +24,7 @@ public class BnkService {
     }
 
     public void showAllAcc() throws SQLException {
-        String sql1 = " select * from Bnk_info";
+        String sql1 = " select * from Bnk_info ";
         PreparedStatement ps1 = connection.prepareStatement(sql1);
         ResultSet rs = ps1.executeQuery();
 
@@ -43,61 +41,59 @@ public class BnkService {
     }
 
     public void checkBalance(String ac_hl_nm) throws SQLException {
-        String sql2 = "select ac_num from Bnk_info where ac_hl_nm=?";
+        String sql2 = "select amount from Bnk_info where ac_hl_nm=?";
         PreparedStatement ps3 = connection.prepareStatement(sql2);
         ps3.setString(1, ac_hl_nm);
         ResultSet rs1 = ps3.executeQuery();
         while ((rs1.next())) {
-            int ac_num = rs1.getInt("ac_num");
-            System.out.println("ac_num : " + ac_num);
+            int amount = rs1.getInt("amount");
+            System.out.println("amount : " + amount);
         }
         connection.commit();
     }
 
-    public void transferMoney(String ac_hl_nm, int amount) throws SQLException {
-        String sql3 = " update Bnk_info set amount =? where ac_hl_nm=?";
-        PreparedStatement ps4 = connection.prepareStatement(sql3);
-        ps4.setInt(1, amount);
-        ps4.setString(2, ac_hl_nm);
 
-        var affected = ps4.executeUpdate();
+    public int Transfer(int amt,int id,int id2) throws SQLException {
+        String sql1="update Bnk_info set amount=amount- ? where ac_num=?";
+        String sql2="update Bnk_info set amount=amount+ ? where ac_num=?";
+        PreparedStatement ps1=connection.prepareStatement(sql1);
+        PreparedStatement ps2= connection.prepareStatement(sql2);
+        ps1.setInt(1,amt);
+        ps1.setInt(2,id);
 
-        var sql4 = "update Bnk_info set amount =? where ac_hl_nm=?";
-        PreparedStatement ps5 = connection.prepareStatement(sql4);
-        ps5.setInt(1, amount);
-        ps5.setString(2, ac_hl_nm);
-
-        System.out.println("affected :" + affected);
-        if (affected == 0) connection.rollback();
+        ps2.setInt(1,amt);
+        ps2.setInt(2,id2);
+        int aff=ps1.executeUpdate();
+        int aff1= ps2.executeUpdate();
+        System.out.println("amount transfered");
         connection.commit();
+          return aff;
     }
 
     public int deposit(int amount, int ac_num) throws SQLException {
-        String sql5 = "update Bnk_info set amount = amount-? where ac_num=?";
+        String sql5 = "update Bnk_info set amount =amount+ ? where ac_num=?";
         PreparedStatement ps6 = connection.prepareStatement(sql5);
         ps6.setInt(1, amount);
         ps6.setInt(2, ac_num);
 
 
         int affected = ps6.executeUpdate();
-        System.out.println("amount withdrawen");
+        System.out.println("amount deposited :" + amount);
         connection.commit();
         return affected;
 
     }
 
-    public void withdraMoney(String ac_hl_nm) throws SQLException {
-        String sql7 = "select amount from Bnk_info where ac_hl_nm=?";
+    public void withdraMoney(int amt, int id) throws SQLException {
+        String sql7 = "update Bnk_info set amount=amount-? where ac_num=?";
         PreparedStatement ps7 = connection.prepareStatement(sql7);
-        ps7.setString(1, ac_hl_nm);
+        ps7.setInt(1, amt);
+        ps7.setInt(2, id);
+        ps7.executeUpdate();
 
-        ResultSet rs5 = ps7.executeQuery();
-        while (rs5.next()) {
-            int amount = rs5.getInt("amount");
-            System.out.println("amount : " + amount);
-
-        }
         connection.commit();
+        System.out.println("withdrawen : " + amt);
+
     }
 
     public void Deactivate(String acc, boolean stat) throws SQLException {
@@ -110,6 +106,15 @@ public class BnkService {
 
         connection.commit();
 
+    }
+
+    public void activate(String acc, boolean sat) throws SQLException {
+        String s11 = "update Bnk_info status=? where ac_hl_nm=?";
+        PreparedStatement ps9 = connection.prepareStatement(s11);
+        ps9.setString(2, acc);
+        ps9.setBoolean(1, sat);
+        ps9.executeUpdate();
+        connection.commit();
     }
 
     public void reActivate(String acc, boolean st) throws SQLException {
