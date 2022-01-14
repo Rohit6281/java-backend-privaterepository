@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.sql.Date;
 import java.time.LocalDate;
 
-public class CarServiceUnitTesst {
+public class CarServiceUnitTest {
     @Test
     public void testSaveCar() {
         CarServiceImpl impl = new CarServiceImpl();
