@@ -8,7 +8,6 @@ import com.rohit.project.billing.hospitalbillingmodule.exception.InvalidAmountEx
 import com.rohit.project.billing.hospitalbillingmodule.repository.BillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.SQLException;
@@ -17,7 +16,6 @@ import java.util.List;
 import java.util.Optional;
 
 @Transactional(
-        isolation = Isolation.READ_UNCOMMITTED,
         rollbackFor = SQLException.class
 )
 @Service
@@ -54,7 +52,7 @@ public class BillServiceImpl implements BillService {
 
     @Override
     public Boolean billPaid(int id, boolean status) throws InvalidAmountException, AmountNotPaidException {
-        if (status = false) throw new AmountNotPaidException("bill not paid");
+
         Optional<Bill> bi = repository.findById(id);
         Bill oldBill = bi.orElseThrow();
         Boolean exStatus = oldBill.getStatus();
@@ -101,7 +99,6 @@ public class BillServiceImpl implements BillService {
                 return exBill;
             }
         }
-
         return exBill;
     }
 }

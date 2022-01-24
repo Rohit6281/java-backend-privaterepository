@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RequestMapping("/bill")
@@ -21,7 +22,7 @@ public class BillController {
     private BillService service;
 
     @PostMapping
-    public ResponseEntity<BillResponse<BillDto>> creatingBill(@RequestBody BillDto dto) {
+    public ResponseEntity<BillResponse<BillDto>> creatingBill(@Valid @RequestBody BillDto dto) {
         var bill = service.creatingBill(dto);
         var response = new BillResponse<BillDto>();
         response.setSts("success");
@@ -31,7 +32,7 @@ public class BillController {
     }
 
     @PutMapping("/update")
-    public ResponseEntity<BillResponse<BillDto>> updateBill(@RequestBody BillDto dto) {
+    public ResponseEntity<BillResponse<BillDto>> updateBill(@Valid @RequestBody BillDto dto) {
         try {
             var billUp = service.updateBill(dto);
             var response = new BillResponse<BillDto>();
@@ -90,11 +91,11 @@ public class BillController {
     }
 
     @GetMapping("/search/{id}")
-    public ResponseEntity<BillResponse<Bill>> search(@PathVariable int id) {
+    public ResponseEntity<BillResponse<Bill>> search(@Valid @PathVariable int id) {
         Bill upDated = service.searchBills(id);
         var response = new BillResponse<Bill>();
         response.setSts("success");
-        response.setMsg("user" + upDated.getPatientName() + " has " + upDated.getAmount());
+        response.setMsg(" user " + upDated.getPatientName() + " has " + upDated.getAmount());
         response.setBody(upDated);
         return new ResponseEntity<>(response, HttpStatus.ACCEPTED);
 
