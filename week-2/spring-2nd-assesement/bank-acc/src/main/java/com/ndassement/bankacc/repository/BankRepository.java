@@ -13,9 +13,14 @@ import java.util.List;
 public interface BankRepository extends JpaRepository<BankAccount, Long> {
     @Modifying
     @Query(value = "update bank_account set balance =:bal where ac_num=:acNum", nativeQuery = true)
-    void withdraw(@Param("bal") double bal, @Param("acNum") Long acNum);
+    void update(@Param("bal") double bal, @Param("acNum") Long acNum);
 
     List<BankAccount> findByAcHldNmStartingWith(String prefix);
 
+
     List<BankAccount> findByStatusTrue();
+    @Modifying
+    @Query(value="select * from bank_account where ac_num=:acNum",nativeQuery = true)
+     void findall(@Param("acNum")Long acNum);
+
 }

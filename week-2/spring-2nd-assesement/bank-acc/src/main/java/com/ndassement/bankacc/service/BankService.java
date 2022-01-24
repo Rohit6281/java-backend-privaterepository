@@ -1,28 +1,29 @@
 package com.ndassement.bankacc.service;
 
 import com.ndassement.bankacc.domain.BankAccount;
+import com.ndassement.bankacc.exception.InvalidAcNumberException;
 import com.ndassement.bankacc.exception.InvalidAmountException;
 
 import java.util.List;
 
 public interface BankService {
-    void createNewAccount(BankAccount ba);
+    void createNewAccount(BankAccount ba);//done
 
-    int updateAccountDetails(BankAccount ba);
+    BankAccount updateAccountDetails(BankAccount ba);//done
 
-    boolean activateAccount(Long acNum);
+    boolean activateAccount(Long acNum);//done
 
-    boolean deActivateAccount(Long acNum);
+    boolean deActivateAccount(Long acNum);//done
 
-    double withdraw(Long acNum, double amt) throws InvalidAmountException;
+    double withdraw(Long acNum, double amt) throws InvalidAmountException;//done
 
-    double deposit(Long acNum, double amt) throws InvalidAmountException;
+    double deposit(Long acNum, double amt) throws InvalidAmountException;//done
 
-    int transferMoney(Long srcAc, Long dstAc, int amt) throws InvalidAmountException;
+    double transferMoney(Long srcAc, Long dstAc, double amt) throws InvalidAmountException;//done error
 
-    BankAccount findAccountByAcNum(Long acNum);
+    BankAccount findAccountByAcNum(Long acNum)throws InvalidAcNumberException;//done
 
-    List<BankAccount> findAllBankAccounts();
+    List<BankAccount> findAllBankAccounts()throws InvalidAcNumberException;//done
 
-    List<BankAccount> namesStartsWith(String prefix);
+    List<BankAccount> namesStartsWith(String prefix);//done
 }
