@@ -17,7 +17,6 @@ import java.util.List;
 @RequestMapping("/bill")
 @RestController
 public class BillController {
-
     @Autowired
     private BillService service;
 
