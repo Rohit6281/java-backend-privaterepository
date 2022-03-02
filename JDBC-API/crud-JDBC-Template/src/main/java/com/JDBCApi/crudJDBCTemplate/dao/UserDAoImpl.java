@@ -1,6 +1,7 @@
-package com.JDBCApi.crudJDBCTemplate.domain;
+package com.JDBCApi.crudJDBCTemplate.dao;
 
 import com.JDBCApi.crudJDBCTemplate.dao.UserDao;
+import com.JDBCApi.crudJDBCTemplate.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
