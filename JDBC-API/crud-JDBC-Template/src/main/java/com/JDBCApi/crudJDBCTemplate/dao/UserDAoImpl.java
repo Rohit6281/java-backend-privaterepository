@@ -2,6 +2,8 @@ package com.JDBCApi.crudJDBCTemplate.dao;
 
 import com.JDBCApi.crudJDBCTemplate.dao.UserDao;
 import com.JDBCApi.crudJDBCTemplate.domain.User;
+import com.JDBCApi.crudJDBCTemplate.exceptions.InvalidIdException;
+import com.JDBCApi.crudJDBCTemplate.exceptions.InvalidUserException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
@@ -18,7 +20,8 @@ public class UserDAoImpl implements UserDao {
     private static final String GET_USERS_QUERY = "SELECT * FROM User";
 
     @Override
-    public User createUser(User user) {
+    public User createUser(User user) throws InvalidUserException {
+        if(user == null) throw new InvalidUserException("user can't be null");
         jdbcTemplate.update(INSERT_USER_QUERY, user.getId(), user.getName(), user.getLastName(), user.getEmail());
         return user;
     }
@@ -30,9 +33,9 @@ public class UserDAoImpl implements UserDao {
     }
 
     @Override
-    public String deleteUser(int id) {
-        jdbcTemplate.update(DELETE_USER_QUERY, id);
-        return "user got deleted by id " + id;
+    public String deleteUser(int id) throws InvalidIdException {
+            jdbcTemplate.update(DELETE_USER_QUERY, id);
+            return "user got deleted by id " + id;
     }
 
     @Override
