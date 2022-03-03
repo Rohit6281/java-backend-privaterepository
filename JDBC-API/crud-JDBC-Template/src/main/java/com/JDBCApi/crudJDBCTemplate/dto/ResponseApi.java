@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ResponseApi <T> {
     private T body;
-    private T httpStatusCode;
+    private String status;
+    private String httpStatusCode;
     private String message;
 }
