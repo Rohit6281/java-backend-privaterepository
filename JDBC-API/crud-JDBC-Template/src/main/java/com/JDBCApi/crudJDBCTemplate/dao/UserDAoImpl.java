@@ -31,7 +31,7 @@ public class UserDAoImpl implements UserDao {
         if (user.getId() == 0) {
             throw new FieldEmptyException("Oops ! Please Enter Proper Data in All The Fields !");
         }
-        if (user.getName() == null || user.getEmail() == null) {
+        if (user.getName() == null ) {
             throw new FieldEmptyException("Oops ! Please Enter Proper Data in All The Fields !");
         }
         List<User> lists = jdbcTemplate.query(GET_USERS_QUERY, (rs, rowNum) ->
@@ -43,7 +43,7 @@ public class UserDAoImpl implements UserDao {
                 ));
         var users = lists.stream().anyMatch(user1 -> user1.getId() == user.getId());
         if (users) {
-            jdbcTemplate.update(UPDATE_USER_QUERY, user.getName(), user.getId());
+            jdbcTemplate.update(UPDATE_USER_QUERY, user.getName(),user.getId());
             return user;
         } else
             throw new DataNotFoundException("Oops ! Entered Data is Not Found at the Database ! ");
