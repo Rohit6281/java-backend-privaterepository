@@ -8,7 +8,10 @@ import java.util.List;
 
 public interface UserDao {
     User createUser(User user) throws InvalidUserException;
+
     User updateUser(User user);
+
     String deleteUser(int id) throws InvalidIdException;
+
     List<User> allUsers();
 }

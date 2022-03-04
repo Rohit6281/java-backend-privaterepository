@@ -1,6 +1,5 @@
 package com.JDBCApi.crudJDBCTemplate.dao;
 
-import com.JDBCApi.crudJDBCTemplate.dao.UserDao;
 import com.JDBCApi.crudJDBCTemplate.domain.User;
 import com.JDBCApi.crudJDBCTemplate.exceptions.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +20,11 @@ public class UserDAoImpl implements UserDao {
     @Override
     public User createUser(User user) throws InvalidUserException {
         if (user == null) throw new InvalidUserException("user can't be null");
-        jdbcTemplate.update(INSERT_USER_QUERY, user.getId(), user.getName(), user.getLastName(), user.getEmail());
+        jdbcTemplate.update(INSERT_USER_QUERY,
+                user.getId(),
+                user.getName(),
+                user.getLastName(),
+                user.getEmail());
         return user;
     }
 
@@ -31,7 +34,7 @@ public class UserDAoImpl implements UserDao {
         if (user.getId() == 0) {
             throw new FieldEmptyException("Oops ! Please Enter Proper Data in All The Fields !");
         }
-        if (user.getName() == null ) {
+        if (user.getName() == null) {
             throw new FieldEmptyException("Oops ! Please Enter Proper Data in All The Fields !");
         }
         List<User> lists = jdbcTemplate.query(GET_USERS_QUERY, (rs, rowNum) ->
@@ -43,7 +46,9 @@ public class UserDAoImpl implements UserDao {
                 ));
         var users = lists.stream().anyMatch(user1 -> user1.getId() == user.getId());
         if (users) {
-            jdbcTemplate.update(UPDATE_USER_QUERY, user.getName(),user.getId());
+            jdbcTemplate.update(UPDATE_USER_QUERY,
+                    user.getName(),
+                    user.getId());
             return user;
         } else
             throw new DataNotFoundException("Oops ! Entered Data is Not Found at the Database ! ");
@@ -70,7 +75,10 @@ public class UserDAoImpl implements UserDao {
     @Override
     public List<User> allUsers() {
         List<User> users = jdbcTemplate.query(GET_USERS_QUERY, (rs, rowNum) ->
-                new User(rs.getInt("id"), rs.getString("name"), rs.getString("lastName"), rs.getString("email"))
+                new User(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("lastName"),
+                        rs.getString("email"))
         );
         if (users.isEmpty()) {
             throw new NoRecordsException("Records Has Been Empty !!");

@@ -15,19 +15,21 @@ public class DomainTests {
         abc.setEmail("rohit@gmail.com");
 
         Assertions.assertEquals(1, abc.getId());
-        Assertions.assertEquals("rohit" , abc.getName());
-        Assertions.assertEquals("p",abc.getLastName());
+        Assertions.assertEquals("rohit", abc.getName());
+        Assertions.assertEquals("p", abc.getLastName());
         Assertions.assertEquals(
                 ("rohit@gmail.com")
                 , abc.getEmail()
         );
     }
+
     @DisplayName("Testing Object Nullability")
     @Test
     void testInValidObject() {
         User us = null;
         Assertions.assertNull(us);
     }
+
     @DisplayName("User Valid Object")
     @Test
     void testValidObject() {
