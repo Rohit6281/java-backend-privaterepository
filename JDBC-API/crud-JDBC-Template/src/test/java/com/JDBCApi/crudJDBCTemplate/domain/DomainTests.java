@@ -30,6 +30,7 @@ public class DomainTests {
         Assertions.assertNull(us);
     }
 
+
     @DisplayName("User Valid Object")
     @Test
     void testValidObject() {

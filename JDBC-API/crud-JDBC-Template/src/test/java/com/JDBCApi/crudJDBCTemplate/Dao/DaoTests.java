@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @RunWith(SpringRunner.class)
-public class NewControllerTests {
+public class DaoTests {
 
     @Autowired
     private UserController controller;
