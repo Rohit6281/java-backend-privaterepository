@@ -4,12 +4,16 @@ import com.JDBCApi.crudJDBCTemplate.dao.UserDao;
 import com.JDBCApi.crudJDBCTemplate.domain.User;
 import com.JDBCApi.crudJDBCTemplate.dto.ResponseApi;
 import com.JDBCApi.crudJDBCTemplate.exceptions.*;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
 
 @RestController
 public class UserController {
@@ -20,6 +24,10 @@ public class UserController {
     private static final String FAILED = "PROCESSED FAILED";
 
     @PostMapping("/user")
+    @ApiOperation("To add the User info")
+    @ApiResponses({@ApiResponse( code = 200 , message = "User Saved"),
+            @ApiResponse(code = 404, message = "Class not found"),
+            @ApiResponse(code = 500, message = "Internal Server error")})
     public ResponseEntity<ResponseApi<User>> addUser(@RequestBody User user) {
         try {
             var response = new ResponseApi<User>();
@@ -42,6 +50,10 @@ public class UserController {
     }
 
     @PutMapping("/user")
+    @ApiOperation("To update the User info")
+    @ApiResponses({@ApiResponse( code = 200 , message = "User updated"),
+            @ApiResponse(code = 404, message = "Class not found"),
+            @ApiResponse(code = 500, message = "Internal Server error")})
     public ResponseEntity<ResponseApi<User>> updateUser(@RequestBody User user) {
         try {
             var response = new ResponseApi<User>();
@@ -63,6 +75,10 @@ public class UserController {
         }
     }
     @GetMapping("/users")
+    @ApiOperation("To get the User info")
+    @ApiResponses({@ApiResponse( code = 200 , message = "User info"),
+            @ApiResponse(code = 404, message = "Class not found"),
+            @ApiResponse(code = 500, message = "Internal Server error")})
     public ResponseEntity<ResponseApi<List<User>>> getUsers() {
         try {
             var response = new ResponseApi<List<User>>();
@@ -84,6 +100,10 @@ public class UserController {
         }
     }
     @DeleteMapping("/user/{id}")
+    @ApiOperation("To delete the User")
+    @ApiResponses({@ApiResponse( code = 200 , message = "User deleted"),
+            @ApiResponse(code = 404, message = "Class not found"),
+            @ApiResponse(code = 500, message = "Internal Server error")})
     public ResponseEntity<ResponseApi<String>> delete (@PathVariable("id") int id){
         try {
             var response = new ResponseApi<String>();
