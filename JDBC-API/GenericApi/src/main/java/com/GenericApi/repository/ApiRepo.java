@@ -34,14 +34,17 @@ public class ApiRepo {
         return user;
     }
 
-    public User getByID(QueryResponse res, int id) {
-        User user = (User) jdbcTemplate.query(res.getQuery(),
-                new BeanPropertyRowMapper<>(User.class), id);
+    public User getByID(QueryResponse res) {
+        String param = res.getQuery() + res.getParam();
+        System.out.println(param);
+        User user = (User) jdbcTemplate.queryForObject(param,
+                new BeanPropertyRowMapper<>(User.class));
+
         return user;
     }
 
     public User updateByID(QueryResponse res, User user) {
-        jdbcTemplate.update(res.getQuery(), user.getId());
+        jdbcTemplate.update(res.getQuery(), user.getEmail(),user.getId());
         return user;
 
     }

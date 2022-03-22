@@ -46,8 +46,8 @@ public class ApiServiceImpl implements ApiService {
     }
 
     @Override
-    public User searchUserByID(int id, QueryResponse res) {
-        User user = repo.getByID(res, id);
+    public User searchUserByID( QueryResponse res) {
+        User user = repo.getByID(res);
         return user;
     }
 }

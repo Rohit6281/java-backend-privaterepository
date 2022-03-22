@@ -49,7 +49,7 @@ public class AppController {
         }
     }
 
-    @PutMapping(value = "/update-users")
+    @PostMapping(value = "/update-users")
     @ApiOperation("To update the User info")
     @ApiResponses({@ApiResponse(code = 200, message = "User updated"),
             @ApiResponse(code = 404, message = "Class not found"),
@@ -123,12 +123,16 @@ public class AppController {
             return new ResponseEntity(response, HttpStatus.BAD_REQUEST);
         }
     }
-
-    public ResponseEntity<ResponseApi<User>> findById(@RequestBody Integer id, @RequestBody QueryResponse user) {
+     @PostMapping(value = "/get-byId")
+     @ApiOperation("To get the User info")
+     @ApiResponses({@ApiResponse(code = 200, message = "User info"),
+             @ApiResponse(code = 404, message = "Class not found"),
+             @ApiResponse(code = 500, message = "Internal Server error")})
+    public ResponseEntity<ResponseApi> findById( @RequestBody QueryResponse user) {
         try {
-            var response = new ResponseApi<User>();
+            var response = new ResponseApi<>();
             response.setStatus(SUCCESS);
-            response.setBody(service.searchUserByID(id, user));
+            response.setBody(service.searchUserByID( user));
             response.setMessage("user has been searched by ID successfully");
             HttpStatus code = ResponseEntity.ok(response).getStatusCode();
             response.setHttpStatusCode(String.valueOf(code));

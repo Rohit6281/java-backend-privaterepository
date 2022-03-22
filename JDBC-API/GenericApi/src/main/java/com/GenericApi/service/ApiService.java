@@ -14,7 +14,7 @@ public interface ApiService {
 
     List<User> allUsers(QueryResponse res);
 
-    User searchUserByID(int id, QueryResponse res);
+    User searchUserByID( QueryResponse res);
 }
 
 
