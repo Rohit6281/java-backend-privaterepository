@@ -1,20 +1,20 @@
 package com.GenericApi.service;
 
-import com.GenericApi.domain.User;
+
 import com.GenericApi.dto.QueryResponse;
 
 import java.util.List;
 
 public interface ApiService {
-    User createUser(User user, QueryResponse res);
+    Object createUser( QueryResponse res);
 
-    User updateUser(User user, QueryResponse res);
+    Object updateUser( QueryResponse res);
 
-    String deleteUser(int id, QueryResponse res);
+    Object deleteUser( QueryResponse res);
 
-    List<User> allUsers(QueryResponse res);
+    List<Object> allUsers(QueryResponse res);
 
-    User searchUserByID( QueryResponse res);
+    Object searchUserByID( QueryResponse res);
 }
 
 

@@ -9,6 +9,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class QueryResponse {
     private String query;
-    private Object Param;
-    private Object paramType;
+    private Object[] Param;
+    private int[] paramType;
 }

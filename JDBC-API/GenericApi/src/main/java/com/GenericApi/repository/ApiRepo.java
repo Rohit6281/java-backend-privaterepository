@@ -1,13 +1,12 @@
 package com.GenericApi.repository;
 
-import com.GenericApi.domain.User;
 import com.GenericApi.dto.QueryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class ApiRepo {
@@ -15,37 +14,31 @@ public class ApiRepo {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public User saveUser(QueryResponse res, User user) {
-        jdbcTemplate.update(res.getQuery(),
-                user.getId(),
-                user.getFirstName(),
-                user.getLastName(),
-                user.getEmail());
+    public Object getByID(QueryResponse res){
+        String query = res.getQuery();
+        Object[] myParms = res.getParam();
+        int[] paramType = res.getParamType();
+        System.out.println(query);
+        List<Map<String,Object>> user = jdbcTemplate.queryForList(query,myParms);
+        return  user;
+    }
+
+    public Object saveUser(QueryResponse res) {
+        return jdbcTemplate.update(res.getQuery(),res.getParam());
+    }
+
+    public int deleteUser(QueryResponse res) {
+        return jdbcTemplate.update(res.getQuery(),res.getParam());
+    }
+
+    public List allUsers(QueryResponse res) {
+        List user = jdbcTemplate.queryForList(res.getQuery());
         return user;
     }
 
-    public int deleteUser(QueryResponse res, int id) {
-        return jdbcTemplate.update(res.getQuery(), id);
-    }
+    public Object updateByID(QueryResponse res) {
+       return  jdbcTemplate.update(res.getQuery(), res.getParam());
 
-    public List<User> allUsers(QueryResponse res) {
-        List<User> user = jdbcTemplate.query(res.getQuery(),
-                new BeanPropertyRowMapper<>(User.class));
-        return user;
-    }
-
-    public User getByID(QueryResponse res) {
-        String param = res.getQuery() + res.getParam();
-        System.out.println(param);
-        User user = (User) jdbcTemplate.queryForObject(param,
-                new BeanPropertyRowMapper<>(User.class));
-
-        return user;
-    }
-
-    public User updateByID(QueryResponse res, User user) {
-        jdbcTemplate.update(res.getQuery(), user.getEmail(),user.getId());
-        return user;
 
     }
 

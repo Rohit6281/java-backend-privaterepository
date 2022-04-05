@@ -1,6 +1,6 @@
 package com.GenericApi.controller;
 
-import com.GenericApi.domain.User;
+
 import com.GenericApi.dto.QueryResponse;
 import com.GenericApi.dto.ResponseApi;
 import com.GenericApi.service.ApiService;
@@ -29,19 +29,19 @@ public class AppController {
     @ApiResponses({@ApiResponse(code = 200, message = "User Saved"),
             @ApiResponse(code = 404, message = "Class not found"),
             @ApiResponse(code = 500, message = "Internal Server error")})
-    public ResponseEntity<ResponseApi<User>> addUser(@RequestBody User user, @RequestBody QueryResponse res) {
+    public ResponseEntity<ResponseApi> addUser( @RequestBody QueryResponse res) {
         try {
-            var response = new ResponseApi<User>();
+            var response = new ResponseApi();
             response.setStatus(SUCCESS);
-            response.setBody(service.createUser(user, res));
+            response.setBody(service.createUser( res));
             response.setMessage("Data Has Been Created  ");
             HttpStatus code = ResponseEntity.ok(response).getStatusCode();
             response.setHttpStatusCode(String.valueOf(code));
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            var response = new ResponseApi<User>();
+            var response = new ResponseApi();
             response.setStatus(FAILED);
-            response.setBody(user);
+            response.setBody(res);
             response.setMessage(e.getMessage());
             HttpStatus code = ResponseEntity.badRequest().build().getStatusCode();
             response.setHttpStatusCode(String.valueOf(code));
@@ -54,19 +54,19 @@ public class AppController {
     @ApiResponses({@ApiResponse(code = 200, message = "User updated"),
             @ApiResponse(code = 404, message = "Class not found"),
             @ApiResponse(code = 500, message = "Internal Server error")})
-    public ResponseEntity<ResponseApi<User>> updateUsersData(@RequestBody User user, QueryResponse res) {
+    public ResponseEntity<ResponseApi> updateUsersData(@RequestBody QueryResponse res) {
         try {
-            var response = new ResponseApi<User>();
+            var response = new ResponseApi();
             response.setStatus(SUCCESS);
-            response.setBody(service.updateUser(user, res));
-            response.setMessage("Data Has Been Updated With Primary Key ID : " + user.getId());
+            response.setBody(service.updateUser(res));
+            response.setMessage("Data Has Been Updated With Primary Key ID : " );
             HttpStatus code = ResponseEntity.ok(response).getStatusCode();
             response.setHttpStatusCode(String.valueOf(code));
             return ResponseEntity.ok(response);
         } catch (Exception e) {
-            var response = new ResponseApi<User>();
+            var response = new ResponseApi();
             response.setStatus(FAILED);
-            response.setBody(user);
+            response.setBody(res);
             response.setMessage(e.getMessage());
             HttpStatus code = ResponseEntity.badRequest().build().getStatusCode();
             response.setHttpStatusCode(String.valueOf(code));
@@ -79,19 +79,19 @@ public class AppController {
     @ApiResponses({@ApiResponse(code = 200, message = "User deleted"),
             @ApiResponse(code = 404, message = "Class not found"),
             @ApiResponse(code = 500, message = "Internal Server error")})
-    public ResponseEntity<ResponseApi<String>> deleteUser(@RequestParam Integer id, @RequestBody QueryResponse user) {
+    public ResponseEntity<ResponseApi> deleteUser( @RequestBody QueryResponse user) {
         try {
-            var response = new ResponseApi<String>();
+            var response = new ResponseApi();
             response.setStatus(SUCCESS);
-            response.setBody(service.deleteUser(id, user));
-            response.setMessage("Data Has Been Deleted Using Primary Key : " + id);
+            response.setBody(service.deleteUser( user));
+            response.setMessage("Data Has Been Deleted Using Primary Key  ");
             HttpStatus code = ResponseEntity.ok(response).getStatusCode();
             response.setHttpStatusCode(String.valueOf(code));
             return ResponseEntity.ok(response);
         } catch (Exception e) {
             var response = new ResponseApi<>();
             response.setStatus(FAILED);
-            response.setBody("ERROR OCCURRED WITH ENTERED ID : " + id);
+            response.setBody("ERROR OCCURRED WITH ENTERED ID ");
             response.setMessage(e.getMessage());
             HttpStatus code = ResponseEntity.badRequest().build().getStatusCode();
             response.setHttpStatusCode(String.valueOf(code));
@@ -104,11 +104,11 @@ public class AppController {
     @ApiResponses({@ApiResponse(code = 200, message = "User info"),
             @ApiResponse(code = 404, message = "Class not found"),
             @ApiResponse(code = 500, message = "Internal Server error")})
-    public ResponseEntity<ResponseApi<List<User>>> searchUsers(@RequestBody QueryResponse user) {
+    public ResponseEntity<ResponseApi<List<Object>>> searchUsers(@RequestBody QueryResponse res) {
         try {
-            var response = new ResponseApi<List<User>>();
+            var response = new ResponseApi<List<Object>>();
             response.setStatus(SUCCESS);
-            response.setBody(service.allUsers(user));
+            response.setBody(service.allUsers(res));
             response.setMessage("Users Has Been Searched SuccessFully !");
             HttpStatus code = ResponseEntity.ok(response).getStatusCode();
             response.setHttpStatusCode(String.valueOf(code));
