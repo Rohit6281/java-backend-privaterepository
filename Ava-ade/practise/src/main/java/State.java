@@ -10,7 +10,11 @@ public class State {
     }
 
     public String getStateName() {
-        return stateName;
+        if(stateName.length() > 16){
+            return "name is too long";
+        }else {
+            return stateName;
+        }
     }
 
     public void setStateName(String stateName) {
@@ -18,7 +22,11 @@ public class State {
     }
 
     public int getPinCode() {
-        return pinCode;
+        if (pinCode >= 100) {
+            return pinCode;
+        }else{
+            return 000;
+        }
     }
 
     public void setPinCode(int pinCode) {
