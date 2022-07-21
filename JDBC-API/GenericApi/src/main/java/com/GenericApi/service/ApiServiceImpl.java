@@ -1,6 +1,5 @@
 package com.GenericApi.service;
 
-import com.GenericApi.domain.User;
 import com.GenericApi.dto.QueryResponse;
 import com.GenericApi.repository.ApiRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,32 +21,32 @@ public class ApiServiceImpl implements ApiService {
     private static final String GET_USERS_BY_ID_QUERY = "select * from User where id=?";
 
     @Override
-    public User createUser(User user, QueryResponse res) {
-        User user1 = repo.saveUser(res, user);
-        return user1;
+    public Object createUser( QueryResponse res) {
+        repo.saveUser(res);
+        return res.getParam();
     }
 
     @Override
-    public User updateUser(User user, QueryResponse res) {
-        var user1 = repo.updateByID(res, user);
-        return null;
+    public Object updateUser( QueryResponse res) {
+        repo.updateByID(res);
+        return res.getParam();
     }
 
     @Override
-    public String deleteUser(int id, QueryResponse res) {
-        repo.deleteUser(res, id);
-        return "deleted user by primary key" + id;
+    public Object[] deleteUser( QueryResponse res) {
+        repo.deleteUser(res);
+        return res.getParam() ;
     }
 
     @Override
-    public List<User> allUsers(QueryResponse res) {
-        List<User> user = repo.allUsers(res);
+    public List<Object> allUsers(QueryResponse res) {
+        List user = repo.allUsers(res);
         return user;
     }
 
     @Override
-    public User searchUserByID( QueryResponse res) {
-        User user = repo.getByID(res);
+    public Object searchUserByID( QueryResponse res) {
+        Object user = repo.getByID(res);
         return user;
     }
 }
